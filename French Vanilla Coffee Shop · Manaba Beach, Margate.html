@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
 <style>
 :root{
   box-sizing:border-box;
@@ -29,7 +30,7 @@
   --card:#12292F; --line:#25434B; --btn-bg:#F5E3A1; --btn-ink:#12262D; --glass:#6CC3B6;
   color-scheme:dark;
 }
-html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 3.75rem);scroll-behavior:smooth}
 *,*::before,*::after{box-sizing:inherit}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:1.0625rem;line-height:1.6}
 h1,h2,h3{font-family:"Young Serif",Georgia,"Times New Roman",serif;font-weight:400;line-height:1.1;margin:0}
@@ -37,8 +38,32 @@ a{color:inherit}
 :focus-visible{outline:3px solid var(--glass);outline-offset:3px;border-radius:4px}
 .wrap{max-width:68rem;margin:0 auto;padding:0 1.5rem}
 
+/* nav */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--hero);z-index:30}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--hero);color:var(--hero-ink);border-bottom:1px solid color-mix(in srgb,var(--hero-ink) 18%,transparent)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;min-height:3.5rem}
+.brand{font-family:"Young Serif",Georgia,"Times New Roman",serif;font-size:1.25rem;text-decoration:none}
+.links{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:1.6rem}
+.links a{text-decoration:none;font-weight:500}
+.links a:hover{text-decoration:underline;text-underline-offset:4px}
+.links .callbtn{background:var(--btn-bg);color:var(--btn-ink);padding:.5rem 1.1rem;border-radius:999px;font-weight:700}
+.links .callbtn:hover{text-decoration:none;filter:brightness(1.12)}
+.burger{display:none;width:2.75rem;height:2.75rem;flex-direction:column;justify-content:center;align-items:center;gap:5px;background:none;border:0;color:inherit;cursor:pointer;margin-right:-.6rem}
+.burger span{display:block;width:1.5rem;height:2px;background:currentColor;transition:transform .2s,opacity .2s}
+.nav.open .burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav.open .burger span:nth-child(2){opacity:0}
+.nav.open .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media (max-width:719px){
+  .js .burger{display:flex}
+  .js .links{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:0;background:var(--hero);padding:.4rem 1.5rem 1.2rem;border-bottom:1px solid color-mix(in srgb,var(--hero-ink) 18%,transparent)}
+  .js .nav.open .links{display:flex}
+  .js .links a{display:block;padding:.9rem 0;font-size:1.15rem}
+  .js .links .callbtn{text-align:center;margin-top:.6rem;padding:.85rem 1.1rem}
+}
+@media (prefers-reduced-motion:reduce){.burger span{transition:none}}
+
 /* hero */
-.hero{background:var(--hero);color:var(--hero-ink);padding:4.5rem 0 0;position:relative;overflow:hidden}
+.hero{background:var(--hero);color:var(--hero-ink);padding:3rem 0 0;position:relative;overflow:hidden}
 .hero h1{font-size:clamp(3.4rem,13vw,9.5rem);letter-spacing:-.02em;max-width:9ch}
 .hero p.lead{font-size:clamp(1.15rem,2.4vw,1.45rem);max-width:34ch;margin:1.5rem 0 2rem}
 .rating{font-weight:700;margin:0 0 2.2rem}
@@ -98,12 +123,25 @@ footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--muted);f
 </style>
 </head>
 <body>
-<header class="hero">
+<nav class="nav" aria-label="Main">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">French Vanilla</a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="links" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <ul class="links" id="links">
+      <li><a href="#full-menu">Menu</a></li>
+      <li><a href="#visit">Find us</a></li>
+      <li><a class="callbtn" href="tel:+27393173124">Call us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
   <div class="wrap">
     <h1>French Vanilla</h1>
     <p class="lead">Coffee and good food at Manaba Beach, Margate.</p>
     <p class="rating">4.9 stars <span>from 325 Google reviews</span></p>
     <div class="btns">
+      <a class="btn" href="tel:+27393173124">Call 039 317 3124</a>
       <a class="btn alt" href="https://www.google.com/maps/search/?api=1&amp;query=French+Vanilla+Coffee+Shop+1+Manaba+Beach+Rd+Margate" target="_blank" rel="noopener">Get directions</a>
     </div>
   </div>
@@ -239,6 +277,8 @@ footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--muted);f
         <dd>Inside La Côte d’Azur, right at Manaba Beach.</dd>
         <dt>Opening hours</dt>
         <dd>Google lists an 8 am start on Mondays. Check the listing for today’s hours before you travel.</dd>
+        <dt>Call us</dt>
+        <dd><a href="tel:+27393173124">039 317 3124</a></dd>
         <dt>Order options</dt>
         <dd>Dine-in, takeaway and delivery.</dd>
       </dl>
@@ -249,5 +289,16 @@ footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--muted);f
 <footer>
   <div class="wrap">French Vanilla Coffee Shop · 1 Manaba Beach Rd, Manaba Beach, Margate</div>
 </footer>
+<script>
+(function(){
+  var n=document.querySelector('.nav'),b=document.getElementById('burger');
+  if(!n||!b)return;
+  function set(o){n.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o));b.setAttribute('aria-label',o?'Close menu':'Open menu')}
+  b.addEventListener('click',function(){set(!n.classList.contains('open'))});
+  n.querySelectorAll('.links a').forEach(function(a){a.addEventListener('click',function(){set(false)})});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});
+  matchMedia('(min-width:720px)').addEventListener('change',function(e){if(e.matches)set(false)});
+})();
+</script>
 </body>
 </html>
