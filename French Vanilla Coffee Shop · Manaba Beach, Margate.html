@@ -120,6 +120,27 @@ dl{margin:0}
 dt{font-weight:700;margin-top:1rem}
 dd{margin:0;color:var(--muted)}
 footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--muted);font-size:.95rem}
+/* features */
+[hidden]{display:none!important}
+.tools{display:none;margin:0 0 2rem}
+.js .tools{display:block}
+.tools input{font:inherit;width:100%;max-width:24rem;padding:.7rem 1.1rem;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);margin-bottom:1rem}
+.chips{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.5rem}
+.chip{font:inherit;font-size:.95rem;padding:.45rem 1rem;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--btn-bg);color:var(--btn-ink);border-color:var(--btn-bg)}
+.reviews{background:var(--hero);color:var(--hero-ink);text-align:center}
+.reviews p{margin:0 0 1.6rem;font-size:1.2rem}
+.faq{max-width:48rem;border-top:2px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;padding:1.1rem 2rem 1.1rem 0;font-weight:700;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:.2rem;top:50%;transform:translateY(-50%);font-size:1.5rem;font-weight:400}
+.faq details[open] summary::after{content:"\2212"}
+.faq details p{margin:0 0 1.2rem;color:var(--muted);max-width:60ch}
+.foot{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
+.sharebtn{font:inherit;font-size:.95rem;color:inherit;background:none;border:1px solid var(--line);border-radius:999px;padding:.4rem 1rem;cursor:pointer}
+.fab{display:none}
+@media (max-width:719px){.fab{display:flex;position:fixed;right:1rem;bottom:calc(1rem + env(safe-area-inset-bottom,0px));z-index:15;padding:.8rem 1.3rem;border-radius:999px;background:var(--btn-bg);color:var(--btn-ink);font-weight:700;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.25)}}
 </style>
 </head>
 <body>
@@ -129,6 +150,7 @@ footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--muted);f
     <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="links" aria-label="Open menu"><span></span><span></span><span></span></button>
     <ul class="links" id="links">
       <li><a href="#full-menu">Menu</a></li>
+      <li><a href="#faq">Questions</a></li>
       <li><a href="#visit">Find us</a></li>
       <li><a class="callbtn" href="tel:+27393173124">Call us</a></li>
     </ul>
@@ -179,6 +201,7 @@ footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--muted);f
     <div class="wrap">
       <h2>What we serve</h2>
       <p class="intro">Prices are in rand, as printed on our menu.</p>
+      <div class="tools"><input id="menusearch" type="search" placeholder="Search the menu" aria-label="Search the menu"><div class="chips" id="chips" role="group" aria-label="Menu categories"></div><p id="menuempty" hidden>No dishes match your search.</p></div>
       <div class="cols">
         <div class="cat"><h3>Breakfast</h3><ul>
           <li><span class="n"><b>The Early Riser</b><i>2 eggs, 2 rashers of bacon, grilled tomato and a slice of white or brown toast</i></span><span class="p">R54</span></li>
@@ -300,6 +323,30 @@ footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--muted);f
     </div>
   </section>
 
+  <section class="reviews">
+    <div class="wrap">
+      <h2>Rated 4.9 on Google</h2>
+      <p>Based on 325 reviews from people who have eaten here.</p>
+      <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=French+Vanilla+Coffee+Shop+1+Manaba+Beach+Rd+Margate" target="_blank" rel="noopener">Read the reviews</a>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <h2>Questions</h2>
+      <div class="faq">
+        <details><summary>Do you offer takeaway and delivery?</summary><p>Yes. You can dine in, take your order away or have it delivered.</p></details>
+        <details><summary>What are your opening hours?</summary><p>Google lists an 8 am start on Mondays. Call 039 317 3124 to confirm today’s hours.</p></details>
+        <details><summary>Is there parking?</summary><p>Yes. There is a free parking lot and free street parking, with plenty of space.</p></details>
+        <details><summary>Is the shop wheelchair accessible?</summary><p>Yes. The car park, entrance, seating and toilet are all wheelchair accessible.</p></details>
+        <details><summary>Do you have a kids’ menu?</summary><p>Yes. The Fred First Club menu has a burger, chicken strips, a frank roll, toasties, ice cream and Fred’s Freaky Shake.</p></details>
+        <details><summary>Can I pay by card?</summary><p>Yes. We take credit cards, debit cards and mobile tap payments.</p></details>
+        <details><summary>Do you serve alcohol?</summary><p>Yes. There is a bar on site with cocktails, beer, wine and spirits.</p></details>
+        <details><summary>Is there outdoor seating?</summary><p>Yes, you can sit outside as well as indoors.</p></details>
+      </div>
+    </div>
+  </section>
+
   <section id="visit">
     <div class="wrap visit">
       <div>
@@ -326,7 +373,7 @@ footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--muted);f
 </main>
 
 <footer>
-  <div class="wrap">French Vanilla Coffee Shop · 1 Manaba Beach Rd, Manaba Beach, Margate</div>
+  <div class="wrap foot"><span>French Vanilla Coffee Shop · 1 Manaba Beach Rd, Manaba Beach, Margate</span><button type="button" id="share" class="sharebtn">Share this page</button></div>
 </footer>
 <script>
 (function(){
@@ -337,6 +384,31 @@ footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--muted);f
   n.querySelectorAll('.links a').forEach(function(a){a.addEventListener('click',function(){set(false)})});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});
   matchMedia('(min-width:720px)').addEventListener('change',function(e){if(e.matches)set(false)});
+})();
+</script>
+<a class="fab" href="tel:+27393173124" aria-label="Call French Vanilla">Call us</a>
+<script>
+(function(){
+  var menu=document.getElementById('full-menu');
+  if(menu){
+    var cats=[].slice.call(menu.querySelectorAll('.cat')),chips=document.getElementById('chips'),q=document.getElementById('menusearch'),empty=document.getElementById('menuempty'),cur='all';
+    var mk=function(label,val){var b=document.createElement('button');b.type='button';b.className='chip';b.textContent=label;b.setAttribute('aria-pressed',String(val===cur));b.onclick=function(){cur=val;[].forEach.call(chips.children,function(c){c.setAttribute('aria-pressed',String(c===b))});apply()};chips.appendChild(b)};
+    var apply=function(){var t=q.value.trim().toLowerCase(),shown=0;
+      cats.forEach(function(c,i){var ok=cur==='all'||cur===String(i),n=0;
+        [].forEach.call(c.querySelectorAll('li'),function(li){var m=!t||li.textContent.toLowerCase().indexOf(t)>-1;li.hidden=!m;if(m)n++});
+        c.hidden=!(ok&&n);if(!c.hidden)shown++});
+      empty.hidden=shown>0};
+    mk('All','all');
+    cats.forEach(function(c,i){mk(c.querySelector('h3').textContent,String(i))});
+    q.addEventListener('input',apply);
+  }
+  var s=document.getElementById('share');
+  if(s)s.onclick=function(){
+    var u=location.href.split('#')[0];
+    if(navigator.share){navigator.share({title:document.title,url:u}).catch(function(){})}
+    else if(navigator.clipboard){navigator.clipboard.writeText(u).then(function(){s.textContent='Link copied'}).catch(function(){s.textContent='Copy the link from your address bar'})}
+    else{s.textContent='Copy the link from your address bar'}
+  };
 })();
 </script>
 </body>
